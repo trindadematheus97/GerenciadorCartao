@@ -1,0 +1,53 @@
+﻿@model IEnumerable<GerenciadorCartao.Models.Cartao>
+
+@{
+    ViewData["Title"] = "Cartões cadastrados";
+}
+
+
+<p>
+    <a asp-action="NovoCartao" class="btn btn-success btn-sm">Novo cartão</a>
+</p>
+<table class="table table-hover table-sm">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeBanco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumeroCartao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Limite)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NomeBanco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumeroCartao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Limite)
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a asp-action="AtualizarCartao" asp-route-cartaoId="@item.CartaoId" class="btn btn-sm btn-primary">Atualizar</a> &emsp;
+                        <a asp-controller="Gastos" asp-action="ListagemGasto" asp-route-cartaoId="@item.CartaoId" class="btn btn-sm btn-secondary">Gastos</a> &emsp;
+                        <form asp-action="ExcluirCartao" asp-route-cartaoId="@item.CartaoId" onsubmit="return confirm('Prosseguir com a exclusão do cartão @item.NumeroCartao ?')">
+                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                        </form>
+
+                    </div>
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>

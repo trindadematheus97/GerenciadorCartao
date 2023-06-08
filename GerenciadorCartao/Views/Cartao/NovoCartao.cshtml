@@ -1,0 +1,36 @@
+﻿@model GerenciadorCartao.Models.Cartao
+
+@{
+    ViewData["Title"] = "Novo Cartão";
+}
+
+
+
+<h6 class="alert alert-success">Novo Cartão</h6>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="NovoCartao">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NomeBanco" class="control-label col-form-label-sm"></label>
+                <input asp-for="NomeBanco" class="form-control form-control-sm" />
+                <span asp-validation-for="NomeBanco" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroCartao" class="control-label col-form-label-sm"></label>
+                <input asp-for="NumeroCartao" class="form-control form-control-sm" />
+                <span asp-validation-for="NumeroCartao" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Limite" class="control-label col-form-label-sm"></label>
+                <input asp-for="Limite" class="form-control form-control-sm" />
+                <span asp-validation-for="Limite" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-success btn-sm" /> &emsp;
+                <a asp-action="Index" class="btn btn-link btn-sm">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>

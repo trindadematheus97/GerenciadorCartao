@@ -1,0 +1,61 @@
+﻿@model GerenciadorCartao.ViewModel.GastosViewModel
+
+@{
+    ViewData["Title"] = "Gastos do cartão " + Model.NumeroCartao;
+    string classes = "c100 big orange p" + Model.PorcentagemGasta;
+}
+
+<div class="alert alert-secondary">
+    Número cartão @Model.NumeroCartao
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="@classes">
+            <span>@Model.PorcentagemGasta%</span>
+            <div class="slice">
+                <div class="bar"></div>
+                <div class="fill"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<p>
+    <a asp-action="NovoGasto" asp-route-cartaoId="@Model.CartaoId" class="btn btn-success btn-sm">Novo Gasto</a>
+</p>
+<table class="table table-hover table-sm">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                Descrição
+            </th>
+            <th>
+                Valor do gasto
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ListaGastos)
+        {
+            <tr>
+                <td>
+                    @item.Descricao
+                </td>
+                <td>
+                    R$ @item.Valor
+                </td>
+                <td>
+                    <a asp-action="AtualizarGasto" asp-route-gastoId="@item.GastoId" class="btn btn-sm btn-primary" style="display: inline-block;">Atualizar</a>
+                    <form asp-action="ExcluirGasto" asp-route-gastoId="@item.GastoId" onclick="confirm('Prosseguir com a exclusão do gasto no valor de @item.Valor ?')" style="display: inline-block;">
+                        <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                    </form>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
